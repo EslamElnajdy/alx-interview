@@ -11,6 +11,11 @@ We want to create a function that return a list of lists
 """
 
 def pascal_triangle(n):
+  """
+  Pascal_triangle
+  - n: param
+  - return: list
+   """
   if n <= 0:
     return []
 
