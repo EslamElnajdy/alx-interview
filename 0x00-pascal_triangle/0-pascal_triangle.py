@@ -11,6 +11,9 @@ We want to create a function that return a list of lists
 """
 
 def pascal_triangle(n):
+  if n <= 0:
+    return []
+
   p_list = [[1]]
   for i in  range(n-1):
     sub_list = [1]
