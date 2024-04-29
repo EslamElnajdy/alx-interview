@@ -10,24 +10,24 @@ We want to create a function that return a list of lists
 
 """
 
+
 def pascal_triangle(n):
-  """
-  Pascal_triangle
-  - n: param
-  - return: list
-   """
-  if n <= 0:
-    return []
+    """
+    Pascal_triangle
+    - n: param
+    - return: list
+    """
+    if n <= 0:
+        return []
 
-  p_list = [[1]]
-  for i in  range(n-1):
-    sub_list = [1]
-    prev_sub_list = p_list[-1]
+    p_list = [[1]]
+    for i in range(n - 1):
+        sub_list = [1]
+        prev_sub_list = p_list[-1]
 
-    for j in range(i):
-      sub_list.append(prev_sub_list[j+1] + prev_sub_list[j])
+        for j in range(i):
+            sub_list.append(prev_sub_list[j + 1] + prev_sub_list[j])
 
-    sub_list.append(1)
-    p_list.append(sub_list)
-
-  return p_list
+        sub_list.append(1)
+        p_list.append(sub_list)
+    return p_list
