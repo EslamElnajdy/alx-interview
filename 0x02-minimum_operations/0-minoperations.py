@@ -14,19 +14,14 @@ def minOperations(n):
     return:
         number of operations
     """
-    op = 0
-    context = 'H'
-    next = 'H'
+    operations = 0
+    divisor = 2
 
-    if n <= 0:
-        return 0
-    while (len(context) < n):
-        if n % len(context) == 0:
-            op += 2
-            next = context
-            context += context
+    while n > 1:
+        if n % divisor == 0:
+            operations += divisor
+            n //= divisor
         else:
-            op += 1
-            context += next
+            divisor += 1
 
-    return op
+    return operations
