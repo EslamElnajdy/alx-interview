@@ -10,37 +10,38 @@ def validUTF8(data):
     data: params[]
     return: boolean
     """
-    # Number of bytes in the current UTF-8 character
+     # Number of bytes to process in the current UTF-8 character
     num_bytes = 0
-
-    # Masks to check the most significant bits of the byte
-    mask1 = 0b10000000
-    mask2 = 0b11000000
-
+    
+    # Masks for checking the leading bits
+    mask1 = 1 << 7
+    mask2 = 1 << 6
+    
     for num in data:
-        # Get the 8 least significant bits
+        # Get the binary representation of the integer
         byte = num & 0xFF
         
         if num_bytes == 0:
-            # Determine how many bytes in the current UTF-8 character
-            if (byte & 0b10000000) == 0:
-                # 1-byte character
+            # Determine how many bytes are in this UTF-8 character
+            if (byte & mask1) == 0:
+                # 1 byte character
                 continue
-            elif (byte & 0b11100000) == 0b11000000:
-                num_bytes = 1
-            elif (byte & 0b11110000) == 0b11100000:
-                num_bytes = 2
-            elif (byte & 0b11111000) == 0b11110000:
-                num_bytes = 3
-            else:
+            elif (byte & (mask1 | mask2)) == mask1:
+                # Invalid byte (should not start with 10xxxxxx)
                 return False
+            elif (byte & (mask1 | mask2)) == (mask1 | mask2):
+                # Determine the number of bytes in the character
+                num_bytes = 1
+                while byte & mask1:
+                    num_bytes += 1
+                    byte <<= 1
+                if num_bytes == 1 or num_bytes > 4:
+                    return False
         else:
-            # Check if it is a valid continuation byte
-            if (byte & mask2) != mask1:
+            # Check if it's a valid continuation byte
+            if (byte & (mask1 | mask2)) != mask1:
                 return False
         
-        # Decrease the number of bytes left to process
         num_bytes -= 1
-
-    # If there are no more expected bytes, return True
+    
     return num_bytes == 0
