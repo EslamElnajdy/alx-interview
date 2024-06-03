@@ -6,9 +6,11 @@ module
 
 from sys import argv
 
+
 def print_solutions(solutions):
     for solution in solutions:
         print(solution)
+
 
 def is_safe(board, row, col):
     for i in range(col):
@@ -24,6 +26,7 @@ def is_safe(board, row, col):
             return False
 
     return True
+
 
 def solve_nqueens(board, col, solutions):
     if col >= len(board):
@@ -44,6 +47,7 @@ def solve_nqueens(board, col, solutions):
 
     return res
 
+
 def nqueens(n):
     board = [[0 for _ in range(n)] for _ in range(n)]
     solutions = []
@@ -52,15 +56,14 @@ def nqueens(n):
 
 
 if __name__ == '__main__':
-  if len(argv) != 2:
-    print("Usage: nqueens N")
-    exit(1)
-  n = int(argv[1])
-  if type(n) is not int:
-    print("N must be a number")
-    exit(1)
-  if n < 4:
-    print("N must be at least 4")
-    exit(1)
-  nqueens(n)
-  
+    if len(argv) != 2:
+        print("Usage: nqueens N")
+        exit(1)
+    n = int(argv[1])
+    if type(n) is not int:
+        print("N must be a number")
+        exit(1)
+    if n < 4:
+        print("N must be at least 4")
+        exit(1)
+    nqueens(n)
