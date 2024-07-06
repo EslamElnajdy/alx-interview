@@ -12,7 +12,9 @@ def winnerIs(n):
             for i in range(p * p, n+1, p):
                 prime[i] = False
             p += 1
-    if prime.count(True) % 2 == 0:
+    if (prime.count(True) - 2) == 0:
+        return 'Ben'
+    if (prime.count(True) - 2) % 2 == 0:
         return 'Ben'
     return 'Maria'
 
@@ -27,9 +29,11 @@ def isWinner(x, nums):
         winner = winnerIs(round_num)
         if (winner == 'Maria'):
             numOfWinToMaria += 1
-        else:
+        elif (winner == 'Ben'):
             numOfWinToBen += 1
     if numOfWinToMaria > numOfWinToBen:
         return 'Maria'
-    else:
+    elif numOfWinToMaria < numOfWinToBen:
         return 'Ben'
+    else:
+        return None
