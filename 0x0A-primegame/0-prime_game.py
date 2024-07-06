@@ -23,6 +23,9 @@ def isWinner(x, nums):
     """
     Determines the overall winner after x rounds based on the nums list.
     """
+
+    if x == 0 or x == -1:
+        return None
     numOfWinToMaria = 0
     numOfWinToBen = 0
     for round_num in nums:
