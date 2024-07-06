@@ -18,6 +18,9 @@ def winnerIs(n):
 
 
 def isWinner(x, nums):
+    """
+    docs
+    """
     numOfWinToMaria = 0
     numOfWinToBen = 0
     for round_num in nums:
