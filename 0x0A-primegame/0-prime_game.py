@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-docs
+This script determines the winner of a game based on prime numbers.
 """
 
 
@@ -11,17 +11,17 @@ def winnerIs(n):
         if (prime[p]):
             for i in range(p * p, n+1, p):
                 prime[i] = False
-            p += 1
-    if (prime.count(True) - 2) == 0:
+        p += 1
+    prime_count = prime.count(True) - 2
+    if prime_count == 0 or prime_count % 2 == 0:
         return 'Ben'
-    if (prime.count(True) - 2) % 2 == 0:
-        return 'Ben'
-    return 'Maria'
+    else:
+        return 'Maria'
 
 
 def isWinner(x, nums):
     """
-    docs
+    Determines the overall winner after x rounds based on the nums list.
     """
     numOfWinToMaria = 0
     numOfWinToBen = 0
