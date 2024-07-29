@@ -6,6 +6,7 @@ Log parsing
 import sys
 import re
 
+
 def output(log: dict) -> None:
     """
     Helper function to display stats.
@@ -15,11 +16,15 @@ def output(log: dict) -> None:
         if log["code_frequency"][code]:
             print("{}: {}".format(code, log["code_frequency"][code]))
 
+
 if __name__ == "__main__":
     # Regular expression to match log lines
-    regex = re.compile(
-        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} - \[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d+\] "GET /projects/260 HTTP/1.1" (\d{3}) (\d+)')
-
+    regex_pattern = (
+        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} - \['
+        r'\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+\] '
+        r'"GET /projects/260 HTTP/1.1" (\d{3}) (\d+)'
+    )
+    regex = re.compile(regex_pattern)
     line_count = 0
     log = {
         "file_size": 0,
